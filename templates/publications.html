@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications - CAIR</title>
+    <link rel="stylesheet" href="{% static 'assets\css\bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Francois+One:400,700,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dosis">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Francois+One">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+    <link rel="stylesheet" href="{% static 'assets\css\styles.min.css' %}">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container"><a class="navbar-brand" href="{% url 'home' %}" style="font-size:20px;'Merriweather Sans', sans-serif; font-weight: normal;">The Centre for Artificial Intelligence Research&nbsp;<br></a><button class="navbar-toggler" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto" style="font-family:Lato, sans-serif;">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'node' %}">Nodes</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'people' %}">People</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'publications' %}">Publications</a></li>
+                    {% if user.is_authenticated %}
+                           <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'logout' %}" style="background-color:#535151;">Logout</a></li>
+                        {% else %}
+                          <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'login' %}" style="background-color:#535151;">Login</a></li>
+                        {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="masthead" style="background-image:url({% static 'assets/img/machine-learning-ai-artificial-intelligence-e1462471461626.jpg' %});background-position:center;">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="site-heading">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8">
+                <div class="post-preview">
+                    <a href="#">
+                        <h2 class="post-title" style=" font-family: Merriweather Sans, sans-serif; font-size:31px; font-weight: 800;">A Tool for Managing Research Outputs <br></h2>
+                        <h3 class="post-subtitle" style="font-family: Lato;font-size:18px;">Produced by CAIR Members</h3>
+                    </a>
+                </div>
+                <div class="post-preview"><a href="#"></a></div>
+                <hr>
+                <div class="clearfix">
+                    <div class="form-group" style="font-family: Lato;font-size:14px;"><label>Search by Node:&nbsp;</label><select><optgroup label="Nodes"><option value="12">UCT</option><option value="13">UWC</option><option value="14">University of Stellenbosch</option><option value="">University of Pretoria: Statistics</option><option value="">University of Pretoria: Philosophy</option><option value="">University of Pretoria: Informatics</option></optgroup></select></div>
+                    <div
+                        class="form-group" style="font-family: Lato;font-size:14px;"><label>Search by Year:&nbsp;</label><input type="number" name="year" placeholder="Year" max="2018"></div>
+                <div class="form-group" style="font-family: Lato;font-size:14px;"><label>Search by Author:&nbsp;</label><select><optgroup label="Authors"><option value="12" selected="">Tommie Meyer</option><option value="13">Jana Wessels</option><option value="14">James Watters</option></optgroup></select><button class="btn btn-primary float-right"
+                        type="button" style="font-family: Merriweather Sans, sans-serif; font-size:14px; background-color:#173558;">Search</button></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="container"></div>
+    <div class="article-list"></div>
+    <div></div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <p class="text-center text-muted copyright" style="font-family: Lato;font-size:14px;">Copyright&nbsp;©&nbsp;Jen Purchase, Jana Wessels, James Watters 2018</p>
+                </div>
+                <div
+                        class="col"><img src="{% static 'assets/img/cair-logo_3.png' %}" width="50" style="background-image:url(&quot;/assets/img/csir.jpg?h=6fd4231655dcb2277522636f12c9ce9d&quot;);"><img src="{% static 'assets/img/csir.jpg' %}" width="50" style="background-image:url(&quot;/assets/img/csir.jpg?h=6fd4231655dcb2277522636f12c9ce9d&quot;);">
+                </div>
+            </div>
+        </div>
+     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+    <script src="{% static 'assets/js/script.min.js' %}"></script>
+</body>
+
+</html>
