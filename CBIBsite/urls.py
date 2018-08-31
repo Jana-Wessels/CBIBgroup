@@ -21,6 +21,7 @@ from django.urls import path, include
 from django.views.generic.base import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import include, url
 
 admin.site.site_header = 'CAIR admin'
 admin.site.site_title = 'CAIR admin'
@@ -36,4 +37,8 @@ urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('users/', include('users.urls')),
     path('users/', include('django.contrib.auth.urls')),
+    url(r'^', include('papers.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

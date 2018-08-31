@@ -63,13 +63,12 @@
                 </div>
                 <div class="post-preview"><a href="#"></a></div>
                 <hr>
-                <div class="clearfix">
-                    <div class="form-group" style="font-family: Lato;font-size:14px;"><label>Search by Node:&nbsp;</label><select><optgroup label="Nodes"><option value="12">UCT</option><option value="13">UWC</option><option value="14">University of Stellenbosch</option><option value="">University of Pretoria: Statistics</option><option value="">University of Pretoria: Philosophy</option><option value="">University of Pretoria: Informatics</option></optgroup></select></div>
-                    <div
-                        class="form-group" style="font-family: Lato;font-size:14px;"><label>Search by Year:&nbsp;</label><input type="number" name="year" placeholder="Year" max="2018"></div>
-                <div class="form-group" style="font-family: Lato;font-size:14px;"><label>Search by Author:&nbsp;</label><select><optgroup label="Authors"><option value="12" selected="">Tommie Meyer</option><option value="13">Jana Wessels</option><option value="14">James Watters</option></optgroup></select><button class="btn btn-primary float-right"
-                        type="button" style="font-family: Merriweather Sans, sans-serif; font-size:14px; background-color:#173558;">Search</button></div>
-            </div>
+                <form class="search" action="{% url 'search' %}" method='post'>
+                {% csrf_token %}
+  <             input type="search" placeholder="Search here..." name="usr_query"
+                value='{{ query }}' required>
+                <button type="submit">Search</button>
+                </form>
         </div>
     </div>
     </div>
