@@ -33,7 +33,6 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('nodes/', TemplateView.as_view(template_name='nodes.html'), name='node'),
     path('people/', TemplateView.as_view(template_name='people.html'), name='people'),
-    path('publications/', TemplateView.as_view(template_name='publications.html'), name='publications'),
     path('admin/', admin.site.urls, name='admin'),
     path('users/', include('users.urls')),
     path('users/', include('django.contrib.auth.urls')),

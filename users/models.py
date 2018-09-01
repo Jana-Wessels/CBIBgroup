@@ -6,9 +6,9 @@ from django.apps import apps
 
 # Custom User implementation containing all the user fields
 class CustomUser(AbstractUser):
-    MEMBER = 0
-    NODEADMIN = 1
-    GLOBALADMIN = 2
+    MEMBER = '0'
+    NODEADMIN = '1'
+    GLOBALADMIN = '2'
 
     ROLES =(
         (MEMBER, 'Member'),
@@ -17,8 +17,6 @@ class CustomUser(AbstractUser):
     )
 
     # add additional fields in here
-    Name = models.CharField(default=' ', max_length=200)
-    Surname = models.CharField(default=' ', max_length=200)
     IDNumber = models.IntegerField(default=0)
 
     # Node is a foreign key so field has to be filled by a node object.
@@ -28,4 +26,4 @@ class CustomUser(AbstractUser):
 
     # string function that returns the username when this class is printed.
     def __str__(self):
-        return self.username
+        return self.first_name+ " "+self.last_name
