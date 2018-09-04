@@ -6,14 +6,13 @@
     {% load static %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publications - CAIR</title>
+    <title>Upload Paper - CAIR</title>
     <link rel="stylesheet" href="{% static 'assets\css\bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Francois+One:400,700,400italic,700italic">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dosis">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Francois+One">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:400,700">
@@ -21,6 +20,7 @@
     <link rel="stylesheet" href="{% static 'assets\css\styles.min.css' %}">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 </head>
 
 <body>
@@ -58,47 +58,12 @@
     </header>
     <div class="container">
         <div class="row">
-            <p class="col-md-10 col-lg-8">
-                <div class="post-preview">
-                    <a href="#">
-                        <h2 class="post-title" style=" font-family: Merriweather Sans, sans-serif; font-size:31px; font-weight: 800;">A Tool for Managing Research Outputs <br></h2>
-                        <h3 class="post-subtitle" style="font-family: Lato;font-size:18px;">Produced by CAIR Members</h3>
-                    </a>
-
-                <div class="post-preview"><a href="#"></a></div>
-
-
-                <form action="/search/" method="get">
-                    <div class="clearfix">
-                        <div class="form-group" style="font-family: Lato;font-size:12px;"><label>Shows papers matching all fields entered.<div/>
-                            <br>
-                    <div class="form-group" style="font-family: Lato;font-size:14px;"><label>Title:     &nbsp;</label><input type="text" name="title"></div>
-                    <div class="form-group" style="font-family: Lato;font-size:14px;"><label>Node:   &nbsp;</label><input type="text" name="nodes"></div>
-                    <div class="form-group" style="font-family: Lato;font-size:14px;"><label>Year:      &nbsp;</label><input type="number" name="year" min="1940" max=2018></div>
-                    <div class="form-group" style="font-family: Lato;font-size:14px;"><label>Author:   &nbsp;</label><input type="text" name="author"></div>
-                        <input type="submit" value="Search">
-                            <br>
-                </form>
-
-                {% if not error %}
-                    {% if papers %}
+            <div class="post">
+                    <a href="{% url 'paper_detail' pk=paper.pk %}">
                         <div class="post-preview">
                             <a href="#">
-                                <h2 class="post-title" style="font-family:Lato, sans-serif;font-size:12px;color:#4f86c3;font-style:normal;font-weight:normal;">Found {{ papers|length }} paper{{ papers|pluralize }}.</h2>
-                            </a>
-
-
-                            {% for paper in papers %}
-                            <a href="#">
                                 <br>
-                                <br>
-                                {% if user.is_authenticated %}
-                                    {% for author in paper.author.all %}
-                                        {% ifequal user author %}
-                                            <a class="btn btn-default" style="float: right;" href="{% url 'paper_edit' pk=paper.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        {% endifequal %}
-                                    {% endfor %}
-                                {% endif %}
+                                <a class="btn btn-default" style="float: right;" href="{% url 'paper_edit' pk=paper.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
                                 <h2 class="post-title" style="font-family:'Merriweather Sans', sans-serif;font-size:18px;color:rgb(0,0,0);">{{ paper.title }}</h2>
                                 <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:11px;color:rgb(0,0,0);">Published on {{ paper.date }}</h3>
                             </a>
@@ -116,7 +81,6 @@
                             <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:14px;color:rgb(0,0,0);font-weight:normal;">BibTeX:</h3>
                             <h3 class="post-subtitle" style="font-family:'Roboto Mono', monospace;font-size:10px;font-weight:normal;color:#7d8285;">{{ paper.BibTex|linebreaks}}</h3>
 
-
                             <form action={{paper.PaperPDF.url}} >
                                 <button class="btn btn-primary" type="submit"  style = "font-family:Lato, sans-serif;background-color:darkslateblue;font-size:7px;height:26px;padding:6px;font-weight:normal;">Research Paper</button>
                             </form>
@@ -130,17 +94,8 @@
                                     {% endifequal %}
                                 {% endfor %}
                             {% endif %}
-
-                            {% endfor %}
-                    {% endif %}
-                {% else %}
-                    <br>
-                    <p style="color: red;font-size:14px;">No papers matched your search criteria.</p>
-                {% endif %}
+                    </a>
                 </div>
-            </div>
-    </div>
-    </div>
     <div class="container"></div>
     <div class="article-list"></div>
     <div></div>
