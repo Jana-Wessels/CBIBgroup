@@ -5,6 +5,6 @@ class UploadPaper(forms.ModelForm):
 
     class Meta:
         model = Paper
-        fields = ('title', 'author', 'abstract', 'BibTex', 'PaperPDF', "PeerPDF",)
+        fields = ('Title', 'Author', 'PublicationType', 'Publisher', 'NumOfPages', 'Abstract', 'BibTex', 'PaperPDF', "PeerPDF",)
 
 

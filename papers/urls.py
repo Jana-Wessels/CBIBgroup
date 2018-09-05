@@ -7,4 +7,6 @@ urlpatterns = [
     url(r'paper/(?P<pk>[0-9]+)/edit/', views.paper_edit, name='paper_edit'),
     url('upload/', views.paper_form, name='paperupload'),
     url(r'^search/$', views.search),
+    url('report/', views.pdf_form, name='report'),
+    url(r'^pdf/$', views.html_to_pdf_view, name='pdf_report'),
 ]

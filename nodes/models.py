@@ -9,7 +9,7 @@ class Node(models.Model):
 
     # string function that returns the node name when this class is printed.
     def __str__(self):
-        return self.Name
+        return self.Location +": "+self.Name
 
 
 

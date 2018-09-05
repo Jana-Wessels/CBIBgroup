@@ -33,13 +33,24 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'people' %}">People</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'publications' %}">Publications</a></li>
                     {% if user.is_authenticated %}
+                        {% ifequal user.Role "1" %}
                         <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'paperupload' %}">Upload Paper</a></li>
-                        {% endif %}
-                    {% if user.is_authenticated %}
-                           <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'logout' %}" style="background-color:#535151;">Logout</a></li>
-                        {% else %}
+                        {% endifequal %}
+
+                        {% ifequal user.Role "2" %}
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'paperupload' %}">Upload Paper</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'report' %}">Generate Report</a></li>
+                        {% endifequal %}
+
+                        {% ifequal user.Role "3" %}
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'paperupload' %}">Upload Paper</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'report' %}">Generate Report</a></li>
+                        {% endifequal %}
+
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'logout' %}" style="background-color:#535151;">Logout</a></li>
+                    {% else %}
                           <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'login' %}" style="background-color:#535151;">Login</a></li>
-                        {% endif %}
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -86,33 +97,53 @@
                             <a href="#">
                                 <h2 class="post-title" style="font-family:Lato, sans-serif;font-size:12px;color:#4f86c3;font-style:normal;font-weight:normal;">Found {{ papers|length }} paper{{ papers|pluralize }}.</h2>
                             </a>
+                        </div>
 
-
+                        <div>
                             {% for paper in papers %}
                             <a href="#">
                                 <br>
                                 <br>
                                 {% if user.is_authenticated %}
-                                    {% for author in paper.author.all %}
-                                        {% ifequal user author %}
-                                            <a class="btn btn-default" style="float: right;" href="{% url 'paper_edit' pk=paper.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        {% endifequal %}
-                                    {% endfor %}
+                                    {% ifequal user.Role "1" %}
+                                        {% for author in paper.Author.all %}
+                                            {% ifequal user author %}
+                                                <a class="btn btn-default" style="float: right;" href="{% url 'paper_edit' pk=paper.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                            {% endifequal %}
+                                        {% endfor %}
+                                    {% endifequal %}
+                                    {% ifequal user.Role "2" %}
+                                        {% for author in paper.Author.all %}
+                                            {% ifequal user.Node author.Node %}
+                                                <a class="btn btn-default" style="float: right;" href="{% url 'paper_edit' pk=paper.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                            {% endifequal %}
+                                        {% endfor %}
+                                    {% endifequal %}
+                                    {% ifequal user.Role "3" %}
+                                        <a class="btn btn-default" style="float: right;" href="{% url 'paper_edit' pk=paper.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    {% endifequal %}
                                 {% endif %}
-                                <h2 class="post-title" style="font-family:'Merriweather Sans', sans-serif;font-size:18px;color:rgb(0,0,0);">{{ paper.title }}</h2>
-                                <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:11px;color:rgb(0,0,0);">Published on {{ paper.date }}</h3>
+                                <h2 class="post-title" style="font-family:'Merriweather Sans', sans-serif;font-size:18px;color:rgb(0,0,0);">{{ paper.Title }}</h2>
+                                <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:11px;color:rgb(0,0,0);">Published on {{ paper.Date }}</h3>
                             </a>
                         </div>
 
                             <div class="post-preview"><a href="#"></a></div>
                             <hr>
-                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:14px;color:rgb(0,0,0);font-weight:normal;">Author{{ paper.author.all|pluralize }}:</h3>
-                                {% for author in paper.author.all %}
+                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:14px;color:rgb(0,0,0);font-weight:normal;">Author{{ paper.Author.all|pluralize }}:</h3>
+                                {% for author in paper.Author.all %}
                                     <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:13px;color:#7d8285;font-weight:normal;">{{author}}</h3>
+                                    {% if author.Role != "0"%}
+                                    <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:11px;color:#7d8285;font-weight:left;float:center">{{author.Node}}</h3>
+                                    {% endif %}
                                 {% endfor %}
 
+                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:14px;color:rgb(0,0,0);font-weight:normal;">Publication:</h3>
+                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:13px;font-weight:normal;color:#7d8285;">{{ paper.PublicationType}}<br></h3>
+                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:14px;color:rgb(0,0,0);font-weight:normal;">Publisher:</h3>
+                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:13px;font-weight:normal;color:#7d8285;">{{ paper.Publisher}}<br></h3>
                             <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:14px;color:rgb(0,0,0);font-weight:normal;">Abstract:</h3>
-                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:13px;font-weight:normal;color:#7d8285;">{{ paper.abstract}}<br></h3>
+                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:13px;font-weight:normal;color:#7d8285;">{{ paper.Abstract}}<br></h3>
                             <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:14px;color:rgb(0,0,0);font-weight:normal;">BibTeX:</h3>
                             <h3 class="post-subtitle" style="font-family:'Roboto Mono', monospace;font-size:10px;font-weight:normal;color:#7d8285;">{{ paper.BibTex|linebreaks}}</h3>
 
@@ -122,16 +153,30 @@
                             </form>
 
                             {% if user.is_authenticated %}
-                                {% for author in paper.author.all %}
+                                {% for author in paper.Author.all %}
                                     {% ifequal user author %}
                                         <form action={{paper.PeerPDF.url}} >
                                             <button class="btn btn-primary" type="submit"  style = "font-family:Lato, sans-serif;background-color:darkslateblue;font-size:7px;height:26px;padding:6px;font-weight:normal;">Peer Review</button>
                                         </form>
                                     {% endifequal %}
                                 {% endfor %}
+
+                                {% ifequal author.Role "1" %}
+                                        <form action={{paper.PeerPDF.url}} >
+                                            <button class="btn btn-primary" type="submit"  style = "font-family:Lato, sans-serif;background-color:darkslateblue;font-size:7px;height:26px;padding:6px;font-weight:normal;">Peer Review</button>
+                                        </form>
+                                {% endifequal %}
+
+                                {% ifequal author.Role "2" %}
+                                        <form action={{paper.PeerPDF.url}} >
+                                            <button class="btn btn-primary" type="submit"  style = "font-family:Lato, sans-serif;background-color:darkslateblue;font-size:7px;height:26px;padding:6px;font-weight:normal;">Peer Review</button>
+                                        </form>
+                                {% endifequal %}
                             {% endif %}
 
                             {% endfor %}
+
+
                     {% endif %}
                 {% else %}
                     <br>

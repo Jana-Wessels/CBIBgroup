@@ -7,11 +7,13 @@ from django.apps import apps
 # Custom User implementation containing all the user fields
 class CustomUser(AbstractUser):
     MEMBER = '0'
-    NODEADMIN = '1'
-    GLOBALADMIN = '2'
+    AUTHOR = '1'
+    NODEADMIN = '2'
+    GLOBALADMIN = '3'
 
     ROLES =(
         (MEMBER, 'Member'),
+        (AUTHOR, 'Author'),
         (NODEADMIN, 'Node Admin'),
         (GLOBALADMIN, 'Global Admin')
     )

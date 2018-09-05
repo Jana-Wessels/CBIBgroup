@@ -1,0 +1,51 @@
+<html>
+<head>
+    {% load staticfiles %}
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAIR Research Reports</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+    <link rel="stylesheet" href="{% static 'assets\css\styles.min.css' %}">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+
+<body>
+  <h2 class="post-title" style="font-family:'Merriweather Sans', sans-serif;font-size:26px;color:rgb(0,0,0);">CAIR Research Papers</h2>
+  {% for paper in papers %}
+     <div class="post-preview">
+                            <a href="#">
+                                <h1 class="post-title" style="font-family:'Merriweather Sans', sans-serif;font-size:18px;color:rgb(0,0,0);">{{ paper.Title }}</h1>
+                                <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:11px;color:rgb(0,0,0);">Published on {{ paper.Date }}</h3>
+                            </a>
+                        </div>
+
+                            <div class="post-preview"><a href="#"></a></div>
+                            <hr>
+                            <div>
+                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:14px;color:rgb(0,0,0);font-weight:normal;">Author{{ paper.Author.all|pluralize }}:</h3>
+                                {% for author in paper.Author.all %}
+                                    <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:13px;color:#7d8285;font-weight:normal;">{{author}}</h3>
+                                {% endfor %}
+                            </div>
+                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:14px;color:rgb(0,0,0);font-weight:normal;">Node{{ paper.Author.all|pluralize }}:</h3>
+                                {% for author in paper.Author.all %}
+                                    {% if author.Role != "0"%}
+                                    <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:13px;color:#7d8285;font-weight:normal;">{{author.Node}}</h3>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:14px;color:rgb(0,0,0);font-weight:normal;">Publication:</h3>
+                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:13px;font-weight:normal;color:#7d8285;">{{ paper.PublicationType}}<br></h3>
+                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:14px;color:rgb(0,0,0);font-weight:normal;">Publisher:</h3>
+                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:13px;font-weight:normal;color:#7d8285;">{{ paper.Publisher}}<br></h3>
+                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:14px;color:rgb(0,0,0);font-weight:normal;">Abstract:</h3>
+                            <h3 class="post-subtitle" style="font-family:Lato, sans-serif;font-size:13px;font-weight:normal;color:#7d8285;">{{ paper.Abstract}}<br></h3>
+
+  {% endfor %}
+</body>
+</html>

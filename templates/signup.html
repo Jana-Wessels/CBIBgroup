@@ -34,13 +34,24 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'people' %}">People</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'publications' %}">Publications</a></li>
                     {% if user.is_authenticated %}
+                        {% ifequal user.Role "1" %}
                         <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'paperupload' %}">Upload Paper</a></li>
-                        {% endif %}
-                        {% if user.is_authenticated %}
-                           <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'logout' %}" style="background-color:#535151;">Logout</a></li>
-                        {% else %}
+                        {% endifequal %}
+
+                        {% ifequal user.Role "2" %}
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'paperupload' %}">Upload Paper</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'report' %}">Generate Report</a></li>
+                        {% endifequal %}
+
+                        {% ifequal user.Role "3" %}
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'paperupload' %}">Upload Paper</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'report' %}">Generate Report</a></li>
+                        {% endifequal %}
+
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'logout' %}" style="background-color:#535151;">Logout</a></li>
+                    {% else %}
                           <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'login' %}" style="background-color:#535151;">Login</a></li>
-                        {% endif %}
+                    {% endif %}
                 </ul>
                 </div>
             </div>
