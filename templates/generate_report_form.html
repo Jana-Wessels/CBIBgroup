@@ -49,6 +49,7 @@
                         <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'admin:index' %}">Admin Site</a></li>
                         {% endifequal %}
 
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'user_detail' %}">Profile</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'logout' %}" style="background-color:#535151;">Logout</a></li>
                     {% else %}
                           <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'login' %}" style="background-color:#535151;">Login</a></li>
@@ -83,7 +84,7 @@
 
                 <form action="/pdf/" method="get">
                     <div class="clearfix">
-                        <div class="form-group" style="font-family: Lato;font-size:12px;"><label>Creates a pdf containing all papers matching the fields entered.<div/>
+                        <div class="form-group" style="font-family: Lato;font-size:12px;"><label>Creates a PDF containing all papers matching the fields entered.<div/>
                             <br>
                     <div class="form-group" style="font-family: Lato;font-size:14px;"><label>Title:     &nbsp;</label><input type="text" name="title"></div>
                     <div class="form-group" style="font-family: Lato;font-size:14px;"><label>Node:   &nbsp;</label><input type="text" name="nodes"></div>

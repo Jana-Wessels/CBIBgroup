@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser
 
+
 # Adds things to the user sign-up form
 class CustomUserCreationForm(UserCreationForm):
 
@@ -10,8 +11,8 @@ class CustomUserCreationForm(UserCreationForm):
         model = CustomUser
         fields = ('username', 'first_name', 'last_name', 'email', 'IDNumber', 'Node')
 
-class CustomUserChangeForm(UserChangeForm):
+class CustomUserChangeForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'first_name', 'last_name', 'email', 'IDNumber', 'Node')
+        fields = ('username', 'first_name', 'last_name', 'email', 'IDNumber', 'Node',)
