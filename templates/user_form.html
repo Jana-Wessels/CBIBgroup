@@ -59,7 +59,7 @@
             </div>
         </div>
     </nav>
-    <header class="masthead" style="background-image:url({% static 'assets/img/machine-learning-ai-artificial-intelligence-e1462471461626.jpg' %});background-position:center;">
+    <header class="masthead" style="background-image:url({% static 'assets/img/mapman.jpeg'  %});background-position:center;">
         <div class="overlay"></div>
         <div class="container">
             <div class="row">
@@ -72,10 +72,7 @@
         </div>
     </header>
     <div class="container">
-        <div class="row">
-                <hr>
-
-                    {% block content %}
+                {% block content %}
                     <form action="user_edit" method="POST" class="post-form">
                         {% csrf_token %}
                         {{ form.as_p }}
@@ -83,7 +80,6 @@
                     </form>
                 {% endblock %}
 
-                </div>
     </div>
     </div>
     <div class="container"></div>
